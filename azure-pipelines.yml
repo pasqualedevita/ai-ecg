@@ -18,11 +18,28 @@ jobs:
         inputs:
           targetType: 'inline'
           script: '$id = "$(Build.BuildId)"; $date = Get-Date -Format "yyyy.MMdd"; Write-Host "##vso[build.updatebuildnumber]$date.$id"'
+
       - task: UsePythonVersion@0
         inputs:
           versionSpec: '3.x'
           addToPath: true
           architecture: 'x64'
+      
       - task: CmdLine@2
+        displayName: Download dataset
         inputs:
-          script: 'mkdir -p $HOME/dataset/ECG/mitdb && rsync -Cavz physionet.org::mitdb $HOME/dataset/ECG/mitdb'
+          script: | 
+            mkdir -p dataset/ECG/mitdb && rsync -Cavz physionet.org::mitdb dataset/ECG/mitdb
+            mkdir -p dataset/ECG/incartdb && rsync -Cavz physionet.org::mitdb dataset/ECG/incartdb
+
+      - task: CmdLine@2
+        displayName: Install requirements
+        inputs:
+          script: | 
+            pip install --no-cache-dir -r src/requirements.txt
+
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.x'
+          addToPath: true
+          architecture: 'x64'
