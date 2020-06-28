@@ -25,4 +25,4 @@ jobs:
           architecture: 'x64'
       - task: CmdLine@2
         inputs:
-          script: 'mkdir -p$HOME/dataset/ECG/mitdb && rsync -Cavz physionet.org::mitdb $HOME/dataset/ECG/mitdb'
+          script: 'mkdir -p $HOME/dataset/ECG/mitdb && rsync -Cavz physionet.org::mitdb $HOME/dataset/ECG/mitdb'
