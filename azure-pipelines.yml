@@ -38,8 +38,7 @@ jobs:
           script: | 
             pip install --no-cache-dir -r src/requirements.txt
 
-      - task: UsePythonVersion@0
+      - task: PythonScript@0
         inputs:
-          versionSpec: '3.x'
-          addToPath: true
-          architecture: 'x64'
+          scriptSource: 'filePath'
+          scriptPath: 'src/main_script.py'
