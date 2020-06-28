@@ -25,4 +25,4 @@ jobs:
           architecture: 'x64'
       - task: CmdLine@2
         inputs:
-          script: 'rsync physionet.org::'
+          script: 'rsync -Cavz physionet.org::mitdb dataset/ECG/mitdb'
